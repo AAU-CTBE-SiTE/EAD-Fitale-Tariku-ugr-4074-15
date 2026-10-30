@@ -1,0 +1,66 @@
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- Address Bean -->
+    <bean id="address" class="com.craft.Address">
+        <property name="city" value="Addis Ababa"/>
+        <property name="country" value="Ethiopia"/>
+    </bean>
+
+    <!-- Subject Beans -->
+    <bean id="math" class="com.craft.Subject">
+        <property name="subjectName" value="Maths 101"/>
+    </bean>
+
+    <bean id="java" class="com.craft.Subject">
+        <property name="subjectName" value="Java Programming"/>
+    </bean>
+
+    <!-- Setter Injection and Collection Injection -->
+    <bean id="student" class="com.craft.Student"
+          scope="singleton">
+
+        <property name="id" value="101"/>
+        <property name="name" value="John Doe"/>
+        <property name="age" value="20"/>
+
+        <property name="address" ref="address"/>
+
+        <property name="subjects">
+            <list>
+                <ref bean="math"/>
+                <ref bean="java"/>
+            </list>
+        </property>
+
+    </bean>
+
+    <!-- Constructor Injection -->
+    <bean id="constructorStudent" class="com.craft.Student">
+
+        <constructor-arg index="0" value="102"/>
+        <constructor-arg index="1" value="Jane Smith"/>
+        <constructor-arg index="2" value="22"/>
+        <constructor-arg index="3" ref="address"/>
+
+    </bean>
+
+    <!-- Prototype Scope -->
+    <bean id="prototypeStudent"
+          class="com.craft.Student"
+          scope="prototype">
+
+        <property name="id" value="103"/>
+        <property name="name" value="Prototype Student"/>
+        <property name="age" value="21"/>
+        <property name="address" ref="address"/>
+
+    </bean>
+
+</beans>
